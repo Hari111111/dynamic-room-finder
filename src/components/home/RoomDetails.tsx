@@ -3,9 +3,11 @@ import type { Room } from '../../types';
 
 type Props = {
   room: Room | null;
+  saved?: boolean;
+  onToggleSave?: () => void;
 };
 
-export function RoomDetails({ room }: Props) {
+export function RoomDetails({ room, saved = false, onToggleSave }: Props) {
   if (!room) {
     return (
       <div className={styles.emptyState}>
@@ -16,10 +18,23 @@ export function RoomDetails({ room }: Props) {
     );
   }
 
+  const mapQuery = encodeURIComponent(`${room.address}, ${room.locality}, ${room.city}`);
+  const embedUrl = `https://www.google.com/maps?q=${mapQuery}&z=15&output=embed`;
+  const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
   return (
     <>
       <div className={styles.detailTop}>
         <p className={styles.sectionEyebrow}>Selected room</p>
+        {onToggleSave ? (
+          <button
+            type="button"
+            className={saved ? styles.saveButtonActive : styles.saveButton}
+            onClick={onToggleSave}
+          >
+            {saved ? 'Saved to wishlist' : 'Save this room'}
+          </button>
+        ) : null}
         <h2>{room.title}</h2>
         <p className={styles.detailAddress}>{room.address}</p>
         <div className={styles.detailMetrics}>
@@ -42,6 +57,32 @@ export function RoomDetails({ room }: Props) {
         <div>
           <p>Best for</p>
           <strong>{room.gender}</strong>
+        </div>
+      </div>
+
+      <div className={styles.detailSection}>
+        <div className={styles.mapSectionHeader}>
+          <div>
+            <h3>Area map</h3>
+            <p className={styles.sectionHint}>Preview the neighborhood and open the full map for directions.</p>
+          </div>
+          <a
+            className={styles.mapAction}
+            href={directionsUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open map
+          </a>
+        </div>
+        <div className={styles.mapFrameWrap}>
+          <iframe
+            title={`${room.title} location map`}
+            src={embedUrl}
+            className={styles.mapFrame}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
         </div>
       </div>
 

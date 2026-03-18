@@ -5,15 +5,24 @@ import type { Room } from '../../types';
 type Props = {
   room: Room;
   active: boolean;
+  saved: boolean;
   onSelect: () => void;
+  onToggleSave: () => void;
 };
 
-export function RoomCard({ room, active, onSelect }: Props) {
+export function RoomCard({ room, active, saved, onSelect, onToggleSave }: Props) {
   return (
-    <button
-      type="button"
+    <article
       className={`${styles.roomCard} ${active ? styles.roomCardActive : ''}`}
       onClick={onSelect}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onSelect();
+        }
+      }}
+      role="button"
+      tabIndex={0}
     >
       <div className={styles.roomImageWrap}>
         <Image
@@ -26,6 +35,19 @@ export function RoomCard({ room, active, onSelect }: Props) {
         <span className={styles.roomTag}>{room.heroTag}</span>
       </div>
       <div className={styles.roomMeta}>
+        <div className={styles.roomActionsRow}>
+          <span className={styles.sectionEyebrow}>Live listing</span>
+          <button
+            type="button"
+            className={saved ? styles.saveButtonActive : styles.saveButton}
+            onClick={(event) => {
+              event.stopPropagation();
+              onToggleSave();
+            }}
+          >
+            {saved ? 'Saved' : 'Save'}
+          </button>
+        </div>
         <div className={styles.roomHeadline}>
           <div>
             <h3>{room.title}</h3>
@@ -52,6 +74,6 @@ export function RoomCard({ room, active, onSelect }: Props) {
           ))}
         </div>
       </div>
-    </button>
+    </article>
   );
 }

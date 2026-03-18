@@ -5,7 +5,9 @@ import {
   useContext,
   useEffect,
   useState,
+  type Dispatch,
   type PropsWithChildren,
+  type SetStateAction,
 } from 'react';
 import { apiRequest } from '../lib/api';
 import { AUTH_STORAGE_KEY } from '../lib/auth-storage';
@@ -45,6 +47,7 @@ type AuthContextValue = {
     email: string;
     password: string;
   }) => Promise<void>;
+  setUser: Dispatch<SetStateAction<AuthUser | null>>;
   logout: () => void;
 };
 
@@ -110,6 +113,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         isLoading,
         login: (payload) => handleAuth('/api/auth/login', payload),
         signup: (payload) => handleAuth('/api/auth/signup', payload),
+        setUser,
         logout,
       }}
     >

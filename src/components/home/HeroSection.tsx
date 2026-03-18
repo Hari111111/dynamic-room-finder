@@ -5,6 +5,7 @@ type Props = {
   summary?: RoomsResponse['summary'];
   selectedRoom: Room | null;
   totalSeats: number;
+  savedCount: number;
   user: AuthUser | null;
   onOpenAuth: () => void;
   onLogout: () => void;
@@ -14,6 +15,7 @@ export function HeroSection({
   summary,
   selectedRoom,
   totalSeats,
+  savedCount,
   user,
   onOpenAuth,
   onLogout,
@@ -65,6 +67,10 @@ export function HeroSection({
           <article>
             <strong>Rs. {summary?.avgPrice ?? 0}</strong>
             <span>Average monthly rent</span>
+          </article>
+          <article>
+            <strong>{savedCount}</strong>
+            <span>Saved rooms</span>
           </article>
         </div>
       </div>
