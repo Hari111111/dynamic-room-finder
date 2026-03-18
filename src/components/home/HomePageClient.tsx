@@ -49,9 +49,16 @@ export function HomePageClient() {
               <p className={styles.sectionEyebrow}>Room list</p>
               <h2>{loading ? 'Loading rooms...' : `${data?.rooms.length ?? 0} rooms match your filters`}</h2>
             </div>
-            <p className={styles.sectionHint}>
-              Dynamic cards from MongoDB with location details, commute notes, and nearby places.
-            </p>
+            <div className={styles.resultsMeta}>
+              <p className={styles.sectionHint}>
+                Dynamic cards with location details, commute notes, and nearby places.
+              </p>
+              <div className={styles.resultsPills}>
+                <span>{filters.city || 'All cities'}</span>
+                <span>{filters.roomType || 'All room types'}</span>
+                <span>{filters.featuredOnly ? 'Featured only' : 'Mixed listings'}</span>
+              </div>
+            </div>
           </div>
 
           <div className={styles.roomGrid}>

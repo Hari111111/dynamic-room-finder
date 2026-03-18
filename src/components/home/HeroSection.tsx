@@ -46,8 +46,13 @@ export function HeroSection({
         </div>
         <p className={styles.heroText}>
           Explore furnished rooms, compare locality vibes, check famous places nearby, and track
-          listings your admin team updates directly from MongoDB.
+          listings your admin team updates in real time.
         </p>
+        <div className={styles.heroHighlights}>
+          <span>Curated for students and working professionals</span>
+          <span>Fast filtering by city, budget, and occupancy</span>
+          <span>Live inventory synced from the admin console</span>
+        </div>
         <div className={styles.heroStats}>
           <article>
             <strong>{summary?.totalRooms ?? 0}</strong>
@@ -82,6 +87,13 @@ export function HeroSection({
             <p>Open seats</p>
             <strong>{totalSeats}</strong>
           </div>
+        </div>
+        <div className={styles.spotlightFooter}>
+          <p>
+            {selectedRoom
+              ? `${selectedRoom.locality}, ${selectedRoom.city}`
+              : 'Start with a room card to inspect details.'}
+          </p>
         </div>
       </div>
     </section>

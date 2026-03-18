@@ -1,6 +1,18 @@
 :root {
   color-scheme: light;
-  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif;
+  font-family: var(--font-body), "Segoe UI", sans-serif;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.88);
+  --border: rgba(36, 49, 76, 0.12);
+  --text-main: #142033;
+  --text-soft: #5d6a82;
+  --accent: #0e5f66;
+  --accent-warm: #b96a1f;
+  --navy: #123055;
+  --canvas:
+    radial-gradient(circle at top left, rgba(209, 155, 70, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(69, 122, 153, 0.16), transparent 24%),
+    linear-gradient(180deg, #f7efe2 0%, #eff4f6 52%, #e5edf1 100%);
 }
 
 * {
@@ -15,6 +27,8 @@ html {
 
 body {
   min-width: 320px;
+  background: var(--canvas);
+  color: var(--text-main);
 }
 
 body,
@@ -23,6 +37,14 @@ button,
 select,
 textarea {
   font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
 }
 
 button {

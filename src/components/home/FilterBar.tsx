@@ -17,6 +17,13 @@ type Props = {
 export function FilterBar({ filters, onChange, options }: Props) {
   return (
     <section className={styles.filters}>
+      <div className={styles.filterHeader}>
+        <div>
+          <p className={styles.sectionEyebrow}>Search filters</p>
+          <h2>Refine by budget, city, occupancy, and curated picks.</h2>
+        </div>
+        <p className={styles.sectionHint}>Designed for quick scanning on desktop and mobile.</p>
+      </div>
       <div className={styles.filterRow}>
         <label className={styles.searchField}>
           <span>Search locality or amenity</span>

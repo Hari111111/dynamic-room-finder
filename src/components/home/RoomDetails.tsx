@@ -7,7 +7,13 @@ type Props = {
 
 export function RoomDetails({ room }: Props) {
   if (!room) {
-    return <div className={styles.emptyState}>No room selected yet.</div>;
+    return (
+      <div className={styles.emptyState}>
+        <p className={styles.sectionEyebrow}>Selection panel</p>
+        <h3>Pick a room to open the full brief.</h3>
+        <p>We'll show pricing, house rules, nearby hotspots, and commute notes here.</p>
+      </div>
+    );
   }
 
   return (
@@ -21,6 +27,7 @@ export function RoomDetails({ room }: Props) {
           <span>{room.reviewCount} reviews</span>
           <span>Available from {room.availableFrom}</span>
         </div>
+        <p className={styles.detailIntro}>{room.description}</p>
       </div>
 
       <div className={styles.detailPriceCard}>
